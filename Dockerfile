@@ -1,4 +1,8 @@
-FROM docker.io/caddy:2.8.4-builder-alpine AS builder
+#Set Caddy Version
+ARG CADDY_VERSION=2
+
+#Get Builder Image and install Extensions
+FROM docker.io/caddy:${CADDY_VERSION}-builder-alpine AS builder
 
 RUN xcaddy build \
     --with github.com/caddy-dns/desec \
@@ -7,6 +11,7 @@ RUN xcaddy build \
     --with github.com/hslatman/caddy-crowdsec-bouncer/http@main \
     --with github.com/hslatman/caddy-crowdsec-bouncer/layer4@main
 
-FROM docker.io/caddy:2.8.4
+#Insert build into image
+FROM docker.io/caddy:${CADDY_VERSION}
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
