@@ -1,2 +1,2 @@
-# Caddy Version 2.8.4
-Caddy Container image with desec and crowdsecc extension
+# Caddy Version 2.9.1
+Caddy Container image with desec and crowdsec extension
